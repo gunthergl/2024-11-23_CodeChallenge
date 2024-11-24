@@ -1,18 +1,15 @@
-# Template dataproject
-A template for data projects
+# Code Challenge Code 
 
-Custom project templates would be nice, but is a premium feature.
-https://docs.gitlab.com/ee/user/group/custom_project_templates.html
+This repository holds the code for the code challenge. All plots and results are saved in the "res" folder after running `main.R`. 
+The gitlab-ci is part of my local gitlab runner whose results I will show during the discussion. I cannot provide a public link to the gitlab-repository, but will show the results. 
 
+Effectively, the gitlab-ci runs the following steps everytime a new commit is pushed:
 
-# Howto 
+ - Downloading data from some server (not Internet)
+ - Cleaning the local directory
+ - Run main.R
+ - Store all results from "res" folder
+ - Compress the "res" folder
+ - Upload the compressed folder to some server (not Internet)
 
-1. To develop locally, specify `DIR_raw_data` as `/data/shared/...` where ... is the relevant data path
-2. In the gitlab-ci pipeline, `DIR_raw_data` is specified automatically for you (`/data/local/...`)
-3. Make all results/plots with `main.R` or `main.py`
-4. Save all results/plots which should be accessible later in `./res/folder_A`, `./res/folder_B`. 
-For every subfolder in `res` there will be a downloadable, compressed file. 
-
-# Info
-The local `.gitlab-ci.yml` uses `datasrc/baseproject/.gitlab-ci.yml` as basis, you just have to specify which version of the baseproject you want to use by using its respective commit-hash. 
-
+Excited to discuss the results with you!
