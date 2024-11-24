@@ -1,0 +1,47 @@
+include:
+  - project: "datasrc/baseproject"
+    file: "/.gitlab-ci.yml"
+    # ref: 
+    #   The hash of the commit from datasrc/dataproject
+    #   from which you want to use the .gitlab-ci.yml
+    ref: 206da05b7e7645ba36888bfc67ff2367c0727f56
+
+# You can overwrite variables, you would usually to this!
+variables:
+  # The data directory WITHOUT shared or local for your current data at hand
+  # data_dir: "exemplary: 01_raw/01_FlowCytometryData/UKR_Hutchinson/2021-12-23_MELANOMA_COHORT_DURACLONE_TCELL"
+
+  # _If_ you have multiple data directories, split them with a space in the same string
+  multiple_data_dirs: "\ 
+    rhskl1/01_raw/exampledata/ex1 \
+    rhskl1/01_raw/exampledata/ex2 \
+    rhskl1/01_raw/exampledata/example_file.txt "
+  # The data is finally saved in shared_data_dir: $DATA_SHARED/$data_shared_targetserver/$CI_PROJECT_PATH
+  data_shared_targetserver: "rhskl1"
+
+  # packages_R_XXX: Clones each repo and installs the package using devtools::install_local()
+  packages_R_gitlabUR_https: ""
+  # e.g.:
+  #   packages_R_gitlabUR_https: "https://git.uni-regensburg.de/packages/cytobench.git"
+  # Uses CI_JOB_TOKEN
+  packages_R_github_repo___token: ""
+  # e.g.:
+  #   packages_R_github_ggrlab: "ggrlab/cytoKal:::$GITHUB_GGRLAB_TOKEN"
+  # For each element, uses
+  #   package=$(sed "s|:::.*$||g" <<< $package_github_https_URL)
+  #   auth_token=$(sed "s|.*:::||g" <<< $package_github_https_URL)
+  #   devtools::install_github($package, auth_token = $auth_token)
+
+## You can also overwrite parts (usually not necessary)
+##   E.g. in the following if you only replace "script", "stage", "tags" and "only" stay the same
+##   as in the included
+#process:
+#  # stage: Process and plot data
+#  # tags:
+#  #   - "data_processor_local"
+#  # only:
+#  #   - main
+#  script:
+#    - echo "I would usually run Rscript with all multiple_data_dirs given as commandline arguments"
+#    - echo "Instead, now I am only echoing." 
+#    - echo "You could change this here anytime" 
